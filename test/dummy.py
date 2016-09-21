@@ -1,3 +1,5 @@
+import json
+
 from borest import app, Route, Error
 
 
@@ -12,9 +14,9 @@ class Hello:
         return "Don't post me, " + username
 
 
-@Error(404)
-def error_404(error_msg):
-    return "404: Page not found"
+@Error([404, 500])
+def errors(http_error):
+    return json.dumps(dict(error=http_error.status))
 
 
 if __name__ == '__main__':

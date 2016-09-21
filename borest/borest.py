@@ -25,17 +25,23 @@ class Route(object):
 
         app.route(self.route_path, method='OPTIONS', callback=lambda *args, **kwargs: (
             response.add_header("Access-Control-Allow-Methods", ', '.join(allowed_methods)),
-            response.add_header("Access-Control-Allow-Origin", "*")
+            response.add_header("Access-Control-Allow-Origin", "*"),
+            response.add_header("Access-Control-Allow-Headers",
+                                "x-requested-with, content-type, accept, origin, authorization, x-csrftoken, user-agent, accept-encoding")
         ))
         return obj
 
 
 class Error(object):
-    def __init__(self, error):
-        self.error_code = error
+    def __init__(self, error_codes):
+        if isinstance(error_codes, list):
+            self.error_codes = error_codes
+        else:
+            self.error_codes = [error_codes]
 
     def __call__(self, obj):
-        app.error_handler[self.error_code] = obj
+        for error_code in self.error_codes:
+            app.error_handler[error_code] = obj
 
 
 app = Bottle()
