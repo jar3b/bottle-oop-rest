@@ -1,1 +1,1 @@
-from .borest import app, Route
+from .borest import app, Route, Error

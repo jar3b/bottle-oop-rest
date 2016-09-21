@@ -1,4 +1,4 @@
-from borest import app, Route
+from borest import app, Route, Error
 
 
 @Route('/hello/<username>')
@@ -10,6 +10,11 @@ class Hello:
 
     def post(self, username=None):
         return "Don't post me, " + username
+
+
+@Error(404)
+def error_404(error_msg):
+    return "404: Page not found"
 
 
 if __name__ == '__main__':

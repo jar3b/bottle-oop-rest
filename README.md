@@ -20,6 +20,13 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
 ```
 
+Error handling (now handler must be a function, not class):
+```
+@Error(404)
+def error_404(error_msg):
+    return "404: Page not found"
+```
+
 Output for GET /hello/jack:
 ```
 HELLO, jack
@@ -38,8 +45,12 @@ Access-Control-Allow-Origin: *
 ```
 
 ## Changelog
+- 0.0.3
+    - Added simple error processing
 - 0.0.2
     - Code refactoring
+    
+
 ## Publishing
 ```
 python setup.py register -r pypitest
