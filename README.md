@@ -25,6 +25,10 @@ Error handling (now handler must be a function, not class):
 @Error(404)
 def error_404(error_msg):
     return "404: Page not found"
+
+@Error([404, 500])
+def errors(http_error):
+    return json.dumps(dict(error=http_error.status))
 ```
 
 Output for GET /hello/jack:
@@ -45,6 +49,9 @@ Access-Control-Allow-Origin: *
 ```
 
 ## Changelog
+- 0.0.4
+    - Added "Access-Control-Allow-Headers" header into "OPTIONS" handler
+    - Fix multiple error handling
 - 0.0.3
     - Added simple error processing
 - 0.0.2
