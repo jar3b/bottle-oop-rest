@@ -1,1 +1,1 @@
-from .borest import BoRest
+from .borest import app, Route

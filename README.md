@@ -1,25 +1,45 @@
 # bottle-oop-rest
-Bottle.py OOP REST simple library
+Bottle.py OOP REST simple library, supports "OPTIONS" out of the box
 
 ## Example usage
 ```
-from borest import BoRest
+from borest import app, Route
 
-class App(BoRest):
-    def __init__(self):
-        super(App, self).__init__()
+@Route('/hello/<username>')
+class Hello:
+    msg = "HELLO, "
 
-    @BoRest.view('/hello/<username>')
-    class Hello:
-        @staticmethod
-        def get(username):
-            return "HELLO "+username
+    def get(self, username=None):
+        return self.msg + username
 
-        @staticmethod
-        def post(username):
-            return "You cannot POST hello "+username
+    def post(self, username=None):
+        return "Don't post me, " + username
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
 ```
 
+Output for GET /hello/jack:
+```
+HELLO, jack
+```
+
+Output for POST /hello/jack:
+```
+Don't post me, jack
+```
+
+Headers for OPTIONS /hello/jack:
+```
+Access-Control-Allow-Methods: OPTIONS, GET, POST
+Content-Length: 0
+Access-Control-Allow-Origin: *
+```
+
+## Changelog
+- 0.0.2
+    - Code refactoring
 ## Publishing
 ```
 python setup.py register -r pypitest
