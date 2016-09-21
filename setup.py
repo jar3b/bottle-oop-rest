@@ -1,7 +1,4 @@
-from distutils.core import setup
-
-with open('requirements.txt') as f:
-    required = f.read().splitlines()
+from setuptools import setup
 
 setup(
     name='bottle-oop-rest',
@@ -12,5 +9,7 @@ setup(
     author='hello',
     author_email='hellotan@live.ru',
     description='Bottle.py OOP REST simple library',
-    install_requires=required
+    install_requires=[
+       'bottle>=0.12.9'
+    ]
 )
