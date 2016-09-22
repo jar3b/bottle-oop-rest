@@ -10,6 +10,7 @@ setup(
     author_email='hellotan@live.ru',
     description='Bottle.py OOP REST simple library',
     install_requires=[
-       'bottle>=0.12.9'
+        'bottle>=0.12.9',
+        'gevent>=1.1.2'
     ]
 )

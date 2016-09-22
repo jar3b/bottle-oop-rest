@@ -1,6 +1,6 @@
-import json
-
 from borest import app, Route, Error
+import json
+from time import sleep
 
 
 @Route('/hello/<username>')
@@ -14,10 +14,18 @@ class Hello:
         return "Don't post me, " + username
 
 
-@Error([404, 500])
+@Route('/sleep/<cnt>')
+class GeventAsync:
+    def get(self, cnt):
+        for x in range(0, int(cnt)):
+            yield 'Iteration #%s' % x
+            sleep(3)
+
+
+@Error([404])
 def errors(http_error):
     return json.dumps(dict(error=http_error.status))
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True, server='gevent')
