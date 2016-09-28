@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='bottle-oop-rest',
-    version='0.0.4',
+    version='0.0.5',
     packages=['borest'],
     url='https://github.com/jar3b/bottle-oop-rest',
     license='MIT',
