@@ -3,14 +3,14 @@ import json
 from time import sleep
 
 
-@Route('/hello/<username>')
+@Route(['/hello/<username>', '/hello'])
 class Hello:
     msg = "HELLO, "
 
-    def get(self, username=None):
+    def get(self, username="Anonimous"):
         return self.msg + username
 
-    def post(self, username=None):
+    def post(self, username="Anonimous"):
         return "Don't post me, " + username
 
 

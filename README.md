@@ -8,14 +8,14 @@ import json
 from time import sleep
 
 
-@Route('/hello/<username>')
+@Route(['/hello/<username>', '/hello'])
 class Hello:
     msg = "HELLO, "
 
-    def get(self, username=None):
+    def get(self, username="Anonimous"):
         return self.msg + username
 
-    def post(self, username=None):
+    def post(self, username="Anonimous"):
         return "Don't post me, " + username
 
 
@@ -63,6 +63,8 @@ Access-Control-Allow-Origin: *
 ```
 
 ## Changelog
+- 0.0.5
+    - Added multiple route support
 - 0.0.4
     - Added "Access-Control-Allow-Headers" header into "OPTIONS" handler
     - Fix multiple error handling
